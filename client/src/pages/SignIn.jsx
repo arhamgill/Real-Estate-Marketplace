@@ -17,7 +17,8 @@ function SignUp() {
     setLoading(true);
     setError(null);
     try {
-      await axios.post("/api/auth/signin", data);
+      const res = await axios.post("/api/auth/signin", data);
+      console.log(res.data.user);
       setLoading(false);
       navigate("/");
     } catch (error) {
@@ -51,7 +52,7 @@ function SignUp() {
           type="submit"
           className="bg-slate-800 text-white py-3 rounded-xl focus:outline-none w-full"
         >
-          {loading ? "Loading..." : "Sign Up"}
+          {loading ? "Loading..." : "Login"}
         </button>
       </form>
       {error && <p className="text-red-600 mt-4">{error}</p>}
