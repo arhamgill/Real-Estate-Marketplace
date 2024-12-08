@@ -1,29 +1,33 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice.js";
 
 function SignUp() {
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    setLoading(true);
-    setError(null);
+    dispatch(signInStart());
     try {
       const res = await axios.post("/api/auth/signin", data);
       console.log(res.data.user);
-      setLoading(false);
+      dispatch(signInSuccess(res.data.user));
       navigate("/");
     } catch (error) {
-      setError(error.response.data.message);
-      setLoading(false);
+      dispatch(signInFailure(error.response.data.message));
     }
   };
   return (
