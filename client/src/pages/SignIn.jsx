@@ -8,6 +8,7 @@ import {
   signInSuccess,
   signInFailure,
 } from "../redux/user/userSlice.js";
+import OAuth from "../components/OAuth";
 
 function SignUp() {
   const { loading, error } = useSelector((state) => state.user);
@@ -58,6 +59,7 @@ function SignUp() {
         >
           {loading ? "Loading..." : "Login"}
         </button>
+        <OAuth />
       </form>
       {error && <p className="text-red-600 mt-4">{error}</p>}
       <div className="mt-4 flex gap-2">

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth";
 
 function SignUp() {
   const [error, setError] = useState(null);
@@ -62,10 +63,11 @@ function SignUp() {
         )}
         <button
           type="submit"
-          className="bg-slate-800 text-white py-3 rounded-xl focus:outline-none w-full"
+          className="bg-slate-800 text-white py-3 rounded-xl focus:outline-none w-full hover:opacity-90"
         >
           {loading ? "Loading..." : "Sign Up"}
         </button>
+        <OAuth />
       </form>
       {error && <p className="text-red-600 mt-4">{error}</p>}
       <div className="mt-4 flex gap-2">
